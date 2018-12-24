@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Static - Natural Language Generation (usecase: bot conversations)
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div [formGroup]="someForm">
+          <ion-item>
+            <ion-label floating>No Of Samples : {{this.noOfSamples}}</ion-label>
+            <ion-input formControlName="inputSample" [(ngModel)]="noOfSamples"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Intent</ion-label>
+            <ion-select formControlName="selectIntent" [(ngModel)]="intent">
+              <ion-option *ngFor="let intent of intentArr" [value]="intent.value">{{intent.text}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input formControlName="input2" [(ngModel)]="name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Date</ion-label>
+            <ion-input formControlName="input3" [(ngModel)]="date"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Time</ion-label>
+            <ion-input formControlName="input4" [(ngModel)]="time"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Subject</ion-label>
+            <ion-input formControlName="input4" [(ngModel)]="subject"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <button ion-button [disabled]="!someForm.valid" (click)="getData();">generate</button>
+          </ion-item>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="right">
+          <ion-label color="dark">The consolidated document is</ion-label>
+          <div *ngIf="name == '' && date == '' && time == '' && subject == ''">
+            <li *ngFor="let int of nameStr">{{int}} </li>
+          </div>
+          <div *ngIf="name !== '' && date !== '' && time !== '' && subject !== ''">
+            <li *ngFor="let int of dateStr">{{int}}</li>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
