@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, Platform } from 'ionic-angular';
 //import { dataService } from '../../service/data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,9 +26,10 @@ export class HomePage {
 
   noOfSamples = 5;
 
+  basepath = '/getSentences';
 
-
-  constructor(public navCtrl: NavController, private http: HttpClient, public formBuilder: FormBuilder, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, private http: HttpClient, public formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController, private _platform: Platform) {
 
     this.someForm = formBuilder.group({
       'inputSample': ['', Validators.compose([Validators.required])],
@@ -38,6 +39,9 @@ export class HomePage {
       'input4': ['', Validators.compose([])],
     });
 
+    if (this._platform.is("cordova")) {
+      this.basepath = 'http://52.202.224.199:5001';
+    }
     // this.getData();
   }
 
@@ -54,7 +58,7 @@ export class HomePage {
 
     loading.present();
 
-    let url = `http://52.202.224.199:5001/getSentences?no_of_samples=${this.noOfSamples}`;
+    let url = `${this.basepath}/getSentences?no_of_samples=${this.noOfSamples}`;
 
     let headers = new HttpHeaders();
 

@@ -7,6 +7,6 @@
   "app_id": "",
   "proxies": [{
     "path": "/getSentences",
-    "proxyUrl": "http://52.202.224.199:5001/getSentences"
+    "proxyUrl": "http://52.202.224.199:5001"
   }]
 }

@@ -33,16 +33,10 @@
           <p>Submitted data: </p>
           <pre>{{ submittedData | json }}</pre> -->
         </div>
-
+        <br>
+        <hr>
         <form [formGroup]="ionInputForm" (ngSubmit)="manage(ionInputForm.value)">
           <ion-list margin-bottom>
-            <!-- <ion-item margin-bottom no-lines>
-            <ion-label floating>Keywords:</ion-label>
-            <ion-input type="text" maxlength="40" formControlName="name"></ion-input>
-            <span>Please enter a keyword name of no more than 40 characters</span>
-          </ion-item> -->
-
-
             <!-- Assign the technologies FormArray to the form
               where we want to track/generate new input track fields -->
             <div formArrayName="technologies" margin-bottom>
