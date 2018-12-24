@@ -27,9 +27,9 @@ app.use(function (req, res, next) {
 app.use(express.static('www'));
 
 //Port number
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 
 //Start the server
-app.listen(port, function () {
+app.listen(port, "0.0.0.0", function () {
   console.log(`Server is listening on port: ${port}`);
 });
