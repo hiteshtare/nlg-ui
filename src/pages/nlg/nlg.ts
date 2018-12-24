@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Service } from '../../app/service';
 import { DynamicFormService } from '../../app/dynamic-form/services/dynamic-form.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CustomHttpService } from '../../app/custom-http.service';
 
 /**
  * Generated class for the NlgPage page.
@@ -42,7 +43,10 @@ export class NlgPage {
 
   ionInputForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, public loadingCtrl: LoadingController, public service: Service, private dynamicFormService: DynamicFormService, private _FB: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient,
+    public loadingCtrl: LoadingController, public service: Service, private dynamicFormService: DynamicFormService,
+    private _FB: FormBuilder, private customHttpService: CustomHttpService) {
+
     this.controls = service.getQuestions();
     this.form = this.dynamicFormService.toFormGroup(this.controls);
 
@@ -77,7 +81,7 @@ export class NlgPage {
 
     loading.present();
 
-    let url = `http://52.202.224.199:5001/getSentences?no_of_samples=${this.noOfSamples}`;
+    let url = `${this.customHttpService.basepath}/getSentences?no_of_samples=${this.noOfSamples}`;
 
     let headers = new HttpHeaders();
     headers = headers.append('Access-Control-Allow-Origin', '*');

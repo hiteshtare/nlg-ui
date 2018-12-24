@@ -12,6 +12,7 @@ import { HomePage } from '../pages/home/home';
 import { NlgPageModule } from '../pages/nlg/nlg.module';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { FormsModule } from '@angular/forms';
+import { CustomHttpService } from './custom-http.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     StatusBar,
     SplashScreen,
     Service,
+    CustomHttpService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
