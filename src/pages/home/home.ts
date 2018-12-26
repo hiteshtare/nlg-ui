@@ -56,7 +56,7 @@ export class HomePage {
 
     loading.present();
 
-    let url = `https://bca70363.ngrok.io/getSentences?no_of_samples=${this.noOfSamples}`;
+    let url = `http://52.202.224.199:5001/getSentences?no_of_samples=${this.noOfSamples}`;
     //let url = `${this.customHttpService.basepath}/getSentences?no_of_samples=${this.noOfSamples}`;
 
     let headers = new HttpHeaders();
