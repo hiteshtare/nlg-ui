@@ -8,9 +8,9 @@ export class CustomHttpService {
   public basepath = '/getSentences';
 
   constructor(private _platform: Platform) {
-    if (this._platform.is("cordova")) {
-      this.basepath = 'http://52.202.224.199:5001';
-    }
+    // if (this._platform.is("cordova")) {
+    //   this.basepath = 'https://bca70363.ngrok.io';
+    // }
   }
 
 }
