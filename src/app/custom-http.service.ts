@@ -5,7 +5,7 @@ import { Platform } from 'ionic-angular';
 @Injectable()
 export class CustomHttpService {
 
-  public basepath = '/getSentences';
+  public basepath = 'https://2adde776.ngrok.io';
 
   constructor(private _platform: Platform) {
     // if (this._platform.is("cordova")) {
