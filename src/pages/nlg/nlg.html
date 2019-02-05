@@ -91,6 +91,9 @@
           <div *ngIf="name !== '' && date !== '' && time !== '' && subject !== ''">
             <li *ngFor="let int of dateStr">{{int}}</li>
           </div>
+          <div *ngIf="intent === 'Search'">
+            <li *ngFor="let int of dateStr">{{int}}</li>
+          </div>
         </div>
       </ion-col>
     </ion-row>

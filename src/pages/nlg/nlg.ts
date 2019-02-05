@@ -70,8 +70,7 @@ export class NlgPage {
   onSubmit(formValue) {
     // this.submittedData = this.form.getRawValue();
     const intent = formValue.intent;
-    if (intent === 'Book' || intent === 'Edit')
-      this.getData(formValue);
+    this.getData(formValue);
   }
 
   getData(p_formValue) {
@@ -92,7 +91,7 @@ export class NlgPage {
         intent_type = 'meeting';
       }
       else if (this.intent === 'Search') {
-        intent_type = 'search';
+        intent_type = 'presentation';
       }
 
     let url = `${this.customHttpService.basepath}/getSentences?no_of_samples=${this.noOfSamples}&type=${intent_type}`;
@@ -213,7 +212,7 @@ export class NlgPage {
     console.log("random", fday[randomNumber]);
 
 
-    const meetingArr = ["Appointment", "Meeting", "Session"];
+    const searchSynonymsArr = ["Search", "Explore", "Inquiry", "Find", "Hunt", "Look"];
 
     //only intent
     this.intentStr = this.dataInfo.map(function (x) {
@@ -222,32 +221,32 @@ export class NlgPage {
     });
 
     //all 
-    if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "") {
+    if (fFile !== "" && fEntity !== "" && fTopic !== "" && fDate !== "" && fTime !== "") {
       this.dateStr = this.intentStr.map(function (x) {
         console.log(fDate);
         return x.replace(/{ date }/g, fDate).replace(/{ file }/g, fFile).replace(/{ time }/g, fTime).replace(/{ entity }/g, fEntity).replace(/{ topic }/g, fTopic).replace(/{ day }/g, fday[randomNumber])
       });
 
-      console.log('Before Meeting replacement');
+      console.log('Before Search Synonyms Arr replacement');
       console.log(this.dateStr);
-      const withoutMeeting = this.dateStr;
-      let withMeeting = [];
+      const withoutsearchSynonymsArr = this.dateStr;
+      let withsearchSynonymsArr = [];
 
-      meetingArr.forEach((item) => {
-        const result = withoutMeeting.map(function (x) {
+      searchSynonymsArr.forEach((item) => {
+        const result = withoutsearchSynonymsArr.map(function (x) {
           console.log(fIntent);
-          return x.replace(/{ meeting }/g, item);
+          return x.replace(/Search/g, item);
         });
-        withMeeting.push('----------------------------------------------------------------------------------------------------');
-        withMeeting = withMeeting.concat(result);
+        withsearchSynonymsArr.push('----------------------------------------------------------------------------------------------------');
+        withsearchSynonymsArr = withsearchSynonymsArr.concat(result);
       });
 
-      this.dateStr = withMeeting;
-      console.log('After Meeting replacement');
+      this.dateStr = withsearchSynonymsArr;
+      console.log('Before Search Synonyms Arr replacement');
       console.log(this.dateStr);
     }//end of if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "")
 
-    if (this.date == "" && this.time == "" && this.name == "" && this.subject == "") {
+    if (fFile === "" && fEntity === "" && fTopic === "" && fDate === "" && fTime === "") {
 
       var ranDate = randomDate(new Date(2018, 0, 1), new Date())
       var ranTime = randomTime(new Date(2018, 0, 1), new Date(), 0, 12)
