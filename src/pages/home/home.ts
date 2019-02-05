@@ -56,7 +56,7 @@ export class HomePage {
 
     loading.present();
 
-    let url = `${this.customHttpService.basepath}/getSentences?no_of_samples=${this.noOfSamples}`;
+    let url = `${this.customHttpService.basepath}/getSentences?no_of_samples=${this.noOfSamples}&&type=meeting`;
     //let url = `https://a27819d1.ngrok.io/getSentences?no_of_samples=${this.noOfSamples}`;
 
     let headers = new HttpHeaders();

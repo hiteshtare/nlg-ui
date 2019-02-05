@@ -9,7 +9,7 @@ import { BaseModel } from './dynamic-form/models/base.model';
 @Injectable()
 export class Service {
 
-  getQuestions() {
+  getKeywords() {
 
     let questions: BaseModel<any>[] = [
 
@@ -117,8 +117,8 @@ export class Service {
       ////////////////////////////////////EDIT////////////////////////////////
       ////////////////////////////////////SEARCH////////////////////////////////
       new IonInput({
-        key: 'presentation',
-        label: 'Presentation',
+        key: 'file',
+        label: 'File',
         showWhen: {
           key: 'intent',
           value: 'Search',
@@ -127,8 +127,8 @@ export class Service {
         required: true
       }),
       new IonInput({
-        key: 'product',
-        label: 'Product',
+        key: 'entity',
+        label: 'Entity',
         showWhen: {
           key: 'intent',
           value: 'Search',
@@ -137,13 +137,33 @@ export class Service {
         required: true
       }),
       new IonInput({
-        key: 'keymessage',
-        label: 'Key Message',
+        key: 'topic',
+        label: 'Topic',
         showWhen: {
           key: 'intent',
           value: 'Search',
         },
         order: 4,
+        required: true
+      }),
+      new IonInput({
+        key: 'date',
+        label: 'Date',
+        showWhen: {
+          key: 'intent',
+          value: 'Search',
+        },
+        order: 5,
+        required: true
+      }),
+      new IonInput({
+        key: 'time',
+        label: 'Time',
+        showWhen: {
+          key: 'intent',
+          value: 'Search',
+        },
+        order: 6,
         required: true
       })
       ////////////////////////////////////SEARCH////////////////////////////////
