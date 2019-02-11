@@ -5,8 +5,7 @@ import { Platform } from 'ionic-angular';
 @Injectable()
 export class CustomHttpService {
 
-  // public basepath = 'https://2adde776.ngrok.io';
-  public basepath = 'http://192.0.4.185:5000';
+  public basepath = 'https://entry.dev15.na01.labs.omnipresence.io/api/nlg';
 
   constructor(private _platform: Platform) {
     // if (this._platform.is("cordova")) {
