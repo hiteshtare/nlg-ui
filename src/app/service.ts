@@ -70,7 +70,8 @@ export class Service {
           key: 'intent',
           value: 'Book',
         },
-        order: 4
+        order: 4,
+        // required: true
       }),
       ////////////////////////////////////BOOK////////////////////////////////
       ////////////////////////////////////EDIT////////////////////////////////
@@ -82,7 +83,7 @@ export class Service {
           value: 'Edit',
         },
         order: 1,
-        required: true
+        // required: true
       }),
       new IonInput({
         key: 'e_date',
@@ -92,7 +93,7 @@ export class Service {
           value: 'Edit',
         },
         order: 2,
-        required: true
+        // required: true
       }),
       new IonInput({
         key: 'e_time',
@@ -102,7 +103,7 @@ export class Service {
           value: 'Edit',
         },
         order: 3,
-        required: true
+        // required: true
       }),
       new IonInput({
         key: 'e_subject',
@@ -112,7 +113,7 @@ export class Service {
           value: 'Edit',
         },
         order: 4,
-        required: true
+        //required: true
       }),
       ////////////////////////////////////EDIT////////////////////////////////
       ////////////////////////////////////SEARCH////////////////////////////////
@@ -124,7 +125,7 @@ export class Service {
           value: 'Search',
         },
         order: 2,
-        required: true
+        //required: true
       }),
       new IonInput({
         key: 'entity',
@@ -134,7 +135,7 @@ export class Service {
           value: 'Search',
         },
         order: 3,
-        required: true
+        //required: true
       }),
       new IonInput({
         key: 'topic',
@@ -144,7 +145,7 @@ export class Service {
           value: 'Search',
         },
         order: 4,
-        required: true
+        //required: true
       }),
       new IonInput({
         key: 'date',
@@ -154,7 +155,7 @@ export class Service {
           value: 'Search',
         },
         order: 5,
-        required: true
+        //required: true
       }),
       new IonInput({
         key: 'time',
@@ -164,7 +165,7 @@ export class Service {
           value: 'Search',
         },
         order: 6,
-        required: true
+        //required: true
       })
       ////////////////////////////////////SEARCH////////////////////////////////
     ];
