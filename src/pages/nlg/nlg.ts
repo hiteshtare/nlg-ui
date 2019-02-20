@@ -41,6 +41,8 @@ export class NlgPage {
 
   noOfSamples = 5;
 
+  paraphraseArr;
+
   ionInputForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient,
@@ -113,7 +115,7 @@ export class NlgPage {
         this.time = p_formValue.b_time;
         this.subject = p_formValue.b_subject;
 
-        this.curatingResultforBook();
+        this.curatingResultforBookandEdit();
       }
       else
         if (this.intent === 'Edit') {
@@ -122,7 +124,7 @@ export class NlgPage {
           this.time = p_formValue.e_time;
           this.subject = p_formValue.e_subject;
 
-          this.curatingResultforBook();
+          this.curatingResultforBookandEdit();
         }
         else if (this.intent === 'Search') {
           // Logic to be added
@@ -139,7 +141,7 @@ export class NlgPage {
   * To curate BOOK and EDIT json result by replacing intent, name, date, time, subject & day
   * with user inputs from form
   */
-  curatingResultforBook() {
+  curatingResultforBookandEdit() {
     var fIntent = this.intent;
     var fName = this.name;
     var fDate = this.date;
@@ -175,7 +177,8 @@ export class NlgPage {
           console.log(fIntent);
           return x.replace(/{ meeting }/g, item);
         });
-        withMeeting.push('----------------------------------------------------------------------------------------------------');
+
+        // withMeeting.push('----------------------------------------------------------------------------------------------------');
         withMeeting = withMeeting.concat(result);
       });
 
@@ -237,7 +240,8 @@ export class NlgPage {
           console.log(fIntent);
           return x.replace(/Search/g, item);
         });
-        withsearchSynonymsArr.push('----------------------------------------------------------------------------------------------------');
+
+        // withsearchSynonymsArr.push('----------------------------------------------------------------------------------------------------');
         withsearchSynonymsArr = withsearchSynonymsArr.concat(result);
       });
 
@@ -254,6 +258,38 @@ export class NlgPage {
         return x.replace(/{ date }/g, ranDate).replace(/{ intent }/g, fIntent).replace(/{ name }/g, "HCP").replace(/{ subject }/g, "General Meeting").replace(/{ time }/g, ranTime).replace(/{ day }/g, fday[randomNumber])
       });
     }//end of if (this.date == "" && this.time == "" && this.name == "" && this.subject == "")
+  }
+
+  /**
+  * To paraphrase the selected curated results depending on the no. of samples
+  */
+  initiateParaphrasing() {
+    let loading = this.loadingCtrl.create({
+      content: 'Paraphrasing...'
+    });
+
+
+    let url = `${this.customHttpService.basepath}/getParaphrases`;
+
+    let headers = new HttpHeaders();
+    headers = headers.append('Access-Control-Allow-Origin', '*');
+    headers = headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Content-Type', 'application/json');
+
+    let body = {};
+    body = {
+      "sentences": this.dateStr
+    };
+    // const body = { "sentences": ["Search side effects through the document related to modafinil", "Search documentation of modafinil"] };
+
+    loading.present();
+    this.http.post(url, body, { headers: headers }).subscribe(data => {
+      this.paraphraseArr = data;
+
+      loading.dismiss();
+    });//end of this.http.post
+
   }
 
   /**

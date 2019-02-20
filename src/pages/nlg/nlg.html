@@ -21,7 +21,8 @@
             </div>
             <div class="form-row">
               <button ion-button type="button" [disabled]="!form.valid" (click)="onSubmit(form.value)">generate</button>
-              <!-- <button type="submit" class="btn btn-success" [disabled]="!form.valid">Save</button> -->
+              <button ion-button type="button" *ngIf="dateStr.length > 0" [disabled]="noOfSamples > 5" (click)="initiateParaphrasing()">Paraphrase</button>
+              <!-- <button ion-button type="button" (click)="initiateParaphrasing()">Paraphrase</button> -->
             </div>
           </div>
           <!-- <pre>{{form.valid | json }}</pre> -->
@@ -72,6 +73,11 @@
           </div>
           <div *ngIf="intent === 'Search'">
             <li *ngFor="let int of dateStr">{{int}}</li>
+          </div>
+
+          <div *ngIf="paraphraseArr">
+            <ion-label color="dark">Paraphrase Results are as follows:</ion-label>
+            <li *ngFor="let int of paraphraseArr">{{int}}</li>
           </div>
         </div>
       </ion-col>
