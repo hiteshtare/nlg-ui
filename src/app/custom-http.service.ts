@@ -6,7 +6,7 @@ import { Platform } from 'ionic-angular';
 export class CustomHttpService {
 
   //public basepath = 'https://entry.dev15.na01.labs.omnipresence.io/api/nlg';
-  public basepath = 'http://192.0.4.185:5000';
+  public basepath = 'http://192.0.4.185:8080';
 
   constructor(private _platform: Platform) {
     // if (this._platform.is("cordova")) {

@@ -39,9 +39,10 @@ export class NlgPage {
   subjStr = [];
   intentArr = [{ value: 'book', text: 'Book' }, { value: 'edit', text: 'Edit' }, { value: 'search', text: 'Search' }];
 
-  noOfSamples = 5;
+  noOfSamples = 1;
 
   paraphraseArr;
+  woSynonms = [];
 
   ionInputForm: FormGroup;
 
@@ -152,7 +153,7 @@ export class NlgPage {
     console.log("random", fday[randomNumber]);
 
 
-    const meetingArr = ["Appointment", "Meeting", "Session"];
+    const meetingArr = ["Meeting", "Appointment", "Session"];
 
     //only intent
     this.intentStr = this.dataInfo.map(function (x) {
@@ -172,11 +173,15 @@ export class NlgPage {
       const withoutMeeting = this.dateStr;
       let withMeeting = [];
 
-      meetingArr.forEach((item) => {
+      meetingArr.forEach((item, index) => {
         const result = withoutMeeting.map(function (x) {
           console.log(fIntent);
           return x.replace(/{ meeting }/g, item);
         });
+
+        if (index == 0) {
+          this.woSynonms = result;
+        }
 
         // withMeeting.push('----------------------------------------------------------------------------------------------------');
         withMeeting = withMeeting.concat(result);
@@ -235,11 +240,15 @@ export class NlgPage {
       const withoutsearchSynonymsArr = this.dateStr;
       let withsearchSynonymsArr = [];
 
-      searchSynonymsArr.forEach((item) => {
+      searchSynonymsArr.forEach((item, index) => {
         const result = withoutsearchSynonymsArr.map(function (x) {
           console.log(fIntent);
           return x.replace(/Search/g, item);
         });
+
+        if (index == 0) {
+          this.woSynonms = result;
+        }
 
         // withsearchSynonymsArr.push('----------------------------------------------------------------------------------------------------');
         withsearchSynonymsArr = withsearchSynonymsArr.concat(result);
@@ -279,7 +288,8 @@ export class NlgPage {
 
     let body = {};
     body = {
-      "sentences": this.dateStr
+      "sentences": this.woSynonms
+      // "sentences": this.dateStr
     };
     // const body = { "sentences": ["Search side effects through the document related to modafinil", "Search documentation of modafinil"] };
 
