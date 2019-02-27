@@ -64,17 +64,10 @@
       </ion-col>
       <ion-col>
         <div class="right">
-          <ion-label color="dark">The consolidated document is</ion-label>
-          <div *ngIf="name == '' && date == '' && time == '' && subject == ''">
-            <li *ngFor="let int of nameStr">{{int}} </li>
-          </div>
-          <div *ngIf="name !== '' && date !== '' && time !== '' && subject !== ''">
+          <div *ngIf="dateStr.length > 0">
+            <ion-label color="dark">The consolidated document is</ion-label>
             <li *ngFor="let int of dateStr">{{int}}</li>
           </div>
-          <div *ngIf="intent === 'Search'">
-            <li *ngFor="let int of dateStr">{{int}}</li>
-          </div>
-
           <div *ngIf="paraphraseArr">
             <ion-label color="dark">Paraphrase Results are as follows:</ion-label>
             <li *ngFor="let int of paraphraseArr">{{int}}</li>

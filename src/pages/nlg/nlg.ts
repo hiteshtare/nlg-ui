@@ -33,10 +33,7 @@ export class NlgPage {
   someForm: FormGroup;
   day = ["Monday", "Tuesday", "Wednesday", "Thuday", "Friday"]
   intentStr = [];
-  nameStr = [];
   dateStr = [];
-  timeStr = [];
-  subjStr = [];
   intentArr = [{ value: 'book', text: 'Book' }, { value: 'edit', text: 'Edit' }, { value: 'search', text: 'Search' }];
 
   noOfSamples = 1;
@@ -72,7 +69,8 @@ export class NlgPage {
 
   onSubmit(formValue) {
     // this.submittedData = this.form.getRawValue();
-    const intent = formValue.intent;
+    this.paraphraseArr = null;
+
     this.getData(formValue);
   }
 
@@ -162,44 +160,45 @@ export class NlgPage {
     });
 
     //all 
-    if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "") {
-      this.dateStr = this.intentStr.map(function (x) {
-        console.log(fDate);
-        return x.replace(/{ date }/g, fDate).replace(/{ name }/g, fName).replace(/{ time }/g, fTime).replace(/{ subject }/g, fSubject).replace(/{ day }/g, fday[randomNumber])
+    // if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "") {
+    this.dateStr = this.intentStr.map(function (x) {
+      console.log(fDate);
+      return x.replace(/{ date }/g, fDate).replace(/{ name }/g, fName).replace(/{ time }/g, fTime).replace(/{ subject }/g, fSubject).replace(/{ day }/g, fday[randomNumber])
+    });
+
+    console.log('Before Meeting replacement');
+    console.log(this.dateStr);
+    const withoutMeeting = this.dateStr;
+    let withMeeting = [];
+
+    meetingArr.forEach((item, index) => {
+      const result = withoutMeeting.map(function (x) {
+        console.log(fIntent);
+        return x.replace(/{ meeting }/g, item);
       });
 
-      console.log('Before Meeting replacement');
-      console.log(this.dateStr);
-      const withoutMeeting = this.dateStr;
-      let withMeeting = [];
+      if (index == 0) {
+        this.woSynonms = result;
+      }
 
-      meetingArr.forEach((item, index) => {
-        const result = withoutMeeting.map(function (x) {
-          console.log(fIntent);
-          return x.replace(/{ meeting }/g, item);
-        });
+      // withMeeting.push('----------------------------------------------------------------------------------------------------');
+      withMeeting = withMeeting.concat(result);
+    });
 
-        if (index == 0) {
-          this.woSynonms = result;
-        }
+    this.dateStr = withMeeting;
+    console.log('After Meeting replacement');
+    console.log(this.dateStr);
 
-        // withMeeting.push('----------------------------------------------------------------------------------------------------');
-        withMeeting = withMeeting.concat(result);
-      });
+    // }//end of if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "")
 
-      this.dateStr = withMeeting;
-      console.log('After Meeting replacement');
-      console.log(this.dateStr);
-    }//end of if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "")
+    // if (this.date == "" && this.time == "" && this.name == "" && this.subject == "") {
 
-    if (this.date == "" && this.time == "" && this.name == "" && this.subject == "") {
-
-      var ranDate = randomDate(new Date(2018, 0, 1), new Date())
-      var ranTime = randomTime(new Date(2018, 0, 1), new Date(), 0, 12)
-      this.nameStr = this.intentStr.map(function (x) {
-        return x.replace(/{ date }/g, ranDate).replace(/{ intent }/g, fIntent).replace(/{ name }/g, "HCP").replace(/{ subject }/g, "General Meeting").replace(/{ time }/g, ranTime).replace(/{ day }/g, fday[randomNumber])
-      });
-    }//end of if (this.date == "" && this.time == "" && this.name == "" && this.subject == "")
+    //   var ranDate = randomDate(new Date(2018, 0, 1), new Date())
+    //   var ranTime = randomTime(new Date(2018, 0, 1), new Date(), 0, 12)
+    //   this.dateStr = this.intentStr.map(function (x) {
+    //     return x.replace(/{ date }/g, ranDate).replace(/{ intent }/g, fIntent).replace(/{ name }/g, "HCP").replace(/{ subject }/g, "General Meeting").replace(/{ time }/g, ranTime).replace(/{ day }/g, fday[randomNumber])
+    //   });
+    // }//end of if (this.date == "" && this.time == "" && this.name == "" && this.subject == "")
   }
 
   /**
@@ -229,44 +228,44 @@ export class NlgPage {
     });
 
     //all 
-    if (fFile !== "" && fEntity !== "" && fTopic !== "" && fDate !== "" && fTime !== "") {
-      this.dateStr = this.intentStr.map(function (x) {
-        console.log(fDate);
-        return x.replace(/{ date }/g, fDate).replace(/{ file }/g, fFile).replace(/{ time }/g, fTime).replace(/{ entity }/g, fEntity).replace(/{ topic }/g, fTopic).replace(/{ day }/g, fday[randomNumber])
+    //if (fFile !== "" && fEntity !== "" && fTopic !== "" && fDate !== "" && fTime !== "") {
+    this.dateStr = this.intentStr.map(function (x) {
+      console.log(fDate);
+      return x.replace(/{ date }/g, fDate).replace(/{ file }/g, fFile).replace(/{ time }/g, fTime).replace(/{ entity }/g, fEntity).replace(/{ topic }/g, fTopic).replace(/{ day }/g, fday[randomNumber])
+    });
+
+    console.log('Before Search Synonyms Arr replacement');
+    console.log(this.dateStr);
+    const withoutsearchSynonymsArr = this.dateStr;
+    let withsearchSynonymsArr = [];
+
+    searchSynonymsArr.forEach((item, index) => {
+      const result = withoutsearchSynonymsArr.map(function (x) {
+        console.log(fIntent);
+        return x.replace(/Search/g, item);
       });
 
-      console.log('Before Search Synonyms Arr replacement');
-      console.log(this.dateStr);
-      const withoutsearchSynonymsArr = this.dateStr;
-      let withsearchSynonymsArr = [];
+      if (index == 0) {
+        this.woSynonms = result;
+      }
 
-      searchSynonymsArr.forEach((item, index) => {
-        const result = withoutsearchSynonymsArr.map(function (x) {
-          console.log(fIntent);
-          return x.replace(/Search/g, item);
-        });
+      // withsearchSynonymsArr.push('----------------------------------------------------------------------------------------------------');
+      withsearchSynonymsArr = withsearchSynonymsArr.concat(result);
+    });
 
-        if (index == 0) {
-          this.woSynonms = result;
-        }
+    this.dateStr = withsearchSynonymsArr;
+    console.log('Before Search Synonyms Arr replacement');
+    console.log(this.dateStr);
+    //}//end of if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "")
 
-        // withsearchSynonymsArr.push('----------------------------------------------------------------------------------------------------');
-        withsearchSynonymsArr = withsearchSynonymsArr.concat(result);
-      });
+    // if (fFile === "" && fEntity === "" && fTopic === "" && fDate === "" && fTime === "") {
 
-      this.dateStr = withsearchSynonymsArr;
-      console.log('Before Search Synonyms Arr replacement');
-      console.log(this.dateStr);
-    }//end of if (this.name !== "" && this.date !== "" && this.time !== "" && this.subject !== "")
-
-    if (fFile === "" && fEntity === "" && fTopic === "" && fDate === "" && fTime === "") {
-
-      var ranDate = randomDate(new Date(2018, 0, 1), new Date())
-      var ranTime = randomTime(new Date(2018, 0, 1), new Date(), 0, 12)
-      this.nameStr = this.intentStr.map(function (x) {
-        return x.replace(/{ date }/g, ranDate).replace(/{ intent }/g, fIntent).replace(/{ name }/g, "HCP").replace(/{ subject }/g, "General Meeting").replace(/{ time }/g, ranTime).replace(/{ day }/g, fday[randomNumber])
-      });
-    }//end of if (this.date == "" && this.time == "" && this.name == "" && this.subject == "")
+    //   var ranDate = randomDate(new Date(2018, 0, 1), new Date())
+    //   var ranTime = randomTime(new Date(2018, 0, 1), new Date(), 0, 12)
+    //   this.dateStr = this.intentStr.map(function (x) {
+    //     return x.replace(/{ date }/g, ranDate).replace(/{ intent }/g, fIntent).replace(/{ name }/g, "HCP").replace(/{ subject }/g, "General Meeting").replace(/{ time }/g, ranTime).replace(/{ day }/g, fday[randomNumber])
+    //   });
+    // }//end of if (this.date == "" && this.time == "" && this.name == "" && this.subject == "")
   }
 
   /**

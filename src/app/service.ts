@@ -119,7 +119,7 @@ export class Service {
       ////////////////////////////////////SEARCH////////////////////////////////
       new IonInput({
         key: 'file',
-        label: 'File',
+        label: 'File Type',
         showWhen: {
           key: 'intent',
           value: 'Search',
@@ -129,7 +129,7 @@ export class Service {
       }),
       new IonInput({
         key: 'entity',
-        label: 'Entity',
+        label: 'Entity/File Name',
         showWhen: {
           key: 'intent',
           value: 'Search',
@@ -139,7 +139,7 @@ export class Service {
       }),
       new IonInput({
         key: 'topic',
-        label: 'Topic',
+        label: 'Topic/Key Messages',
         showWhen: {
           key: 'intent',
           value: 'Search',
