@@ -1,0 +1,26 @@
+<div [formGroup]="form" [ngSwitch]="input.controlType" class="container" *ngIf="!hidden">
+  <div *ngSwitchCase="'input'">
+    <ion-item>
+      <ion-label floating>{{input.label}}</ion-label>
+      <ion-input [formControlName]="input.key" [id]="input.key"></ion-input>
+      <span class="help-block" *ngIf="!isValid">{{inputError}}</span>
+    </ion-item>
+  </div>
+  <!-- CHECKBOX -->
+  <div class="col-xs-12" *ngSwitchCase="'checkbox'">
+    <input class="form-check-input" type="checkbox" [formControlName]="input.key" [id]="input.key" [name]="input.name">
+    <label class="control-label" [attr.for]="input.key">{{input.label}}</label>
+    <a class="info-tooltip"><i class="fa fa-question-circle" aria-hidden="true">
+      </i></a>
+    <span class="help-block" *ngIf="!isValid">{{inputError}}</span>
+  </div>
+  <!-- DROPDOWN -->
+  <div class="col-xs-12" *ngSwitchCase="'dropdown'">
+    <ion-item>
+      <ion-label floating>{{input.label}}</ion-label>
+      <ion-select [formControlName]="input.key" [id]="input.key">
+        <ion-option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+</div>
